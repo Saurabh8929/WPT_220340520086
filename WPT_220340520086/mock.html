@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+
+
+
+<input type="text" id="Bkid" placeholder="Book id">
+<span id="msg">message</span><br>
+
+<input type="text" id="bknm" placeholder="Book name"><br>
+
+<input type="text" id="pric" placeholder="price">
+<br>
+
+<button id="update">Update book</button>
+
+
+
+</body>
+
+<script src="jquery-3.5.1.min.js"></script>
+<script>//our scrip will come here 
+
+
+	$("#bkid").blur(()=>{
+
+		let y=$("#bkid").val();
+
+		let ajaxdb={
+			data:{x:y},
+			url:"http://localhost:8081/getbook",
+			type:'get',
+			datatype:'json',
+			success:(output)=>{
+				if(output.bookidfound){
+					$("#msg").text("Bookid found");
+
+	$("#bknm").val(output.bookdetails.bknm);
+	$("#pri").val(output.bookdetails.pric);
+				}
+			else{
+				$("#msg").text("Book not found");
+				$("bknm").text("");
+				$("price").val("");
+				}
+				},
+
+				error:(output)=>{console.log("error")
+					}
+				}
+				$.ajax(ajacdb);
+
+			});
+		
+	
+
+
+
+
+
+
+$(document).ready(function()
+{
+console.log("no more sins");
+$("#update").click(function () 
+	{ 
+		//console.log("jquery works");
+		alert("jquery works")
+	});
+
+
+});
+
+
+
+</script>
+
+
+</html>
